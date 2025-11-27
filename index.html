@@ -1,65 +1,453 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3Dweb</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Oswald&display=swap" rel="stylesheet">
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            font-family: 'Noto Sans TC', sans-serif;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        .top, .bottom {
-            flex: 0 0 10%;
-            background-color: #f1f1f1;
-            text-align: left;
-            padding: 10px;
-            box-sizing: border-box;
-            font-family: 'Oswald', sans-serif;
-        }
-        .middle {
-            flex: 1;
-            overflow: hidden;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .link {
-            display: inline-block;
-            margin: 0 10px;
-        }
-        h2 {
-            display: inline;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Golden Jade Terre Co., Ltd. | 高玉企業有限公司</title>
+  <meta name="description" content="Golden Jade Terre（高玉企業）— 專營高端義大利食品與飲品的國際貿易公司。專業、信賴、長期夥伴。" />
+  <meta property="og:title" content="Golden Jade Terre | 高玉企業" />
+  <meta property="og:description" content="專業・信賴・長期夥伴" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og-image.png" />
+  <meta name="theme-color" content="#0f2e1d" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --green:#0f2e1d; /* 深綠 */
+      --gold:#c9a227;  /* 金色 */
+      --ivory:#f7f4ef; /* 米白 */
+      --ink:#1a1a1a;   /* 深灰黑 */
+      --muted:#6b7280; /* 次要文字 */
+      --ring: 0 0 0 3px rgba(201,162,39,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;color:var(--ink);background:#fff;font-family:"Noto Sans TC",system-ui,-apple-system,Segoe UI,Roboto,Arial,"PingFang TC","Microsoft JhengHei",sans-serif}
+    h1,h2,h3,.brand{font-family:Oswald,Impact,Haettenschweiler,'Arial Narrow Bold',sans-serif;letter-spacing:.5px}
+    img{max-width:100%;display:block}
+    a{color:inherit;text-decoration:none}
+    /* Header */
+    .nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e5e7eb}
+    .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+    .row{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{display:flex;gap:12px;align-items:center;font-weight:600}
+    .logo{width:36px;height:36px;border-radius:50%;background:conic-gradient(from 210deg at 50% 50%, var(--gold), #f5e2a0, var(--gold));display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .logo svg{width:20px;height:20px;fill:var(--green)}
+    .brand .name{display:flex;flex-direction:column;line-height:1}
+    .name span:first-child{font-size:18px}
+    .name span:last-child{font-size:12px;color:var(--muted)}
+    .menu{display:flex;gap:20px}
+    .menu a{padding:10px 6px;border-radius:10px}
+    .menu a:hover{background:#f3f4f6}
+    .menu-toggle{display:none}
+    @media (max-width: 900px){
+      .menu{display:none}
+      .menu-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;border:1px solid #e5e7eb;background:#fff}
+      .drawer{position:fixed;inset:0 0 0 auto;width:min(85vw,360px);transform:translateX(100%);transition:transform .3s ease;background:#fff;border-left:1px solid #e5e7eb;display:flex;flex-direction:column}
+      .drawer.open{transform:translateX(0)}
+      .drawer a{padding:16px 20px;border-bottom:1px solid #f1f5f9}
+    }
+    /* Hero */
+    .hero{background:linear-gradient(180deg, #0f2e1d 0%, #153826 60%, #0f2e1d 100%);color:#fff}
+    .hero .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;padding:80px 20px}
+    .eyebrow{color:#f5e2a0;letter-spacing:.2em;font-size:12px}
+    .hero h1{font-size:44px;margin:.2em 0 .4em}
+    .hero p{color:#d1fae5;line-height:1.8}
+    .cta{display:flex;gap:12px;margin-top:24px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:999px;border:1px solid transparent;font-weight:600;cursor:pointer}
+    .btn-primary{background:var(--gold);color:#2c1f00}
+    .btn-primary:focus{box-shadow:var(--ring)}
+    .btn-ghost{border-color:#ffffff40;color:#fff}
+    .badges{display:flex;gap:14px;flex-wrap:wrap;margin-top:22px}
+    .badge{padding:8px 12px;border-radius:999px;background:#0b2317;border:1px solid #ffffff22;font-size:12px;color:#e9f0ec}
+    .hero-card{background:#0b2317;border:1px solid #ffffff22;border-radius:16px;padding:16px}
+    .hero-grid{display:grid;grid-template-columns:1fr;gap:14px}
+    .hero-stat{display:flex;align-items:center;gap:12px;padding:10px;border-radius:12px;background:#0f2e1d;border:1px solid #ffffff1f}
+    .hero-stat b{color:#f5e2a0;font-size:20px}
+    @media (max-width: 900px){
+      .hero .wrap{grid-template-columns:1fr;padding:56px 20px}
+      .hero h1{font-size:36px}
+    }
+    /* Sections */
+    section{padding:72px 0}
+    .sec-head{margin-bottom:28px}
+    .sec-eyebrow{color:var(--gold);font-size:12px;letter-spacing:.18em}
+    .sec-title{font-size:32px;margin:6px 0}
+    .sec-desc{color:#475569}
+    /* Products */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{border:1px solid #e5e7eb;border-radius:16px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+    .card img{aspect-ratio:4/3;object-fit:cover}
+    .card .body{padding:16px}
+    .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:#f3f4f6;font-size:12px;color:#374151}
+    .price{text-align:right;color:#111827}
+    @media (max-width: 900px){.cards{grid-template-columns:1fr}}
+    /* Channels */
+    .logos{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+    .logo-item{border:1px dashed #e5e7eb;border-radius:12px;padding:14px;text-align:center;background:var(--ivory)}
+    .logo-item span{display:block;font-weight:600;color:#334155}
+    @media (max-width: 900px){.logos{grid-template-columns:repeat(2,1fr)}}
+    /* About */
+    .about{background:var(--ivory)}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    .kpi{padding:18px;border-radius:14px;background:#fff;border:1px solid #e5e7eb}
+    .kpi b{font-size:28px;color:var(--green)}
+    @media (max-width: 900px){.kpis{grid-template-columns:1fr}}
+    /* Offices */
+    .offices{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media (max-width: 900px){.offices{grid-template-columns:1fr}}
+        /* Contact */
+    .contact{background:linear-gradient(180deg,#fff,#fafaf9)}
+    form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+    form .full{grid-column:1 / -1}
+    input,textarea,select{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #e5e7eb;font:inherit}
+    input:focus,textarea:focus,select:focus{outline:none;box-shadow:var(--ring);border-color:#d1b35a}
+    textarea{min-height:120px;resize:vertical}
+    .form-note{color:#6b7280;font-size:12px;margin-top:10px}
+    /* Footer */
+    footer{background:#0a1d14;color:#c5d1cc}
+    footer .wrap{padding:38px 20px}
+    footer a{color:#e9f0ec}
+    .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
+    .foot-grid h4{margin:0 0 10px;color:#f5e2a0}
+    .copyright{border-top:1px solid #113624;padding:14px 0;color:#9fb4ab;text-align:center;font-size:12px}
+    @media (max-width: 900px){.foot-grid{grid-template-columns:1fr}}
+    /* Utilities */
+    .fade{opacity:0;transform:translateY(8px);transition:all .5s ease}
+    .fade.appear{opacity:1;transform:none}
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="top">
-            <h2>Tailift</h2>    
-			<div class="link"><a href="Pushup/1008Pip_PU_002.html" target="content">推高機</a></div>
-	        <div class="link"><a href="3Dweb/Component.html" target="content">3Component</a></div>			
-	
-			<div class="link" style="text-align: right;">
-            <a href="Nebula/Nebula.html" target="content">Nebula</a>
-            </div>
-
-		
-        </div>
-        <div class="middle">
-            <iframe src="3Dweb/Component.html" name="content"></iframe>
-        </div>
+  <!-- Header -->
+  <header class="nav" role="navigation">
+    <div class="wrap row">
+      <a class="brand" href="#home" aria-label="回到首頁">
+        <span class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5Zm0 3.5 5 3.1v6.8l-5 3.1-5-3.1V8.6l5-3.1Z"/></svg>
+        </span>
+        <span class="name">
+          <span>Golden Jade Terre</span>
+          <span>高玉企業有限公司</span>
+        </span>
+      </a>
+      <nav class="menu" aria-label="主選單">
+        <a href="#expertise">服務</a>
+        <a href="#products">產品</a>
+        <a href="#channels">通路</a>
+        <a href="#about">關於我們</a>
+        <a href="#offices">全球據點</a>
+        <a href="#contact">聯絡</a>
+      </nav>
+      <button class="menu-toggle" id="menuBtn" aria-controls="drawer" aria-expanded="false" aria-label="開啟選單">☰</button>
     </div>
+    <div class="drawer" id="drawer" aria-hidden="true">
+      <a href="#expertise">服務</a>
+      <a href="#products">產品</a>
+      <a href="#channels">通路</a>
+      <a href="#about">關於我們</a>
+      <a href="#offices">全球據點</a>
+      <a href="#contact">聯絡</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">OUR PROMISE</div>
+        <h1>專業・信賴・長期夥伴<br><span style="color:var(--gold)">Professionalism, Trust, Partnership</span></h1>
+        <p>Golden Jade Terre（高玉企業）專注高端義大利食品與飲品的國際採購與銷售，服務台灣與海外通路。從產地酒莊到您的餐桌，我們堅持品質控管與高效率供應合作。</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#products">瀏覽產品</a>
+          <a class="btn btn-ghost" href="#contact">取得報價</a>
+        </div>
+        <div class="badges">
+          <span class="badge">Italian Wine Expert</span>
+          <span class="badge">ISO / ESG 文件支援</span>
+          <span class="badge">B2B 團隊配合</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-grid">
+          <div class="hero-stat"><b>24–72h</b> 快速報價/樣品安排</div>
+          <div class="hero-stat"><b>100%+</b> 進口合規文件覆核</div>
+          <div class="hero-stat"><b>10+ 年</b> 食品品牌整合經驗</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expertise -->
+  <section id="expertise">
+    <div class="wrap">
+      <header class="sec-head fade">
+        <div class="sec-eyebrow">OUR SERVICES</div>
+        <h2 class="sec-title">我們的服務</h2>
+        <p class="sec-desc">從全球採購到文件法規、從銷售顧問到訂貨系統優化，提供一條龍 B2B 服務。</p>
+      </header>
+      <div class="cards fade">
+        <article class="card">
+          <div class="body">
+            <div class="chip">Sourcing</div>
+            <h3>全球食品與飲料採購</h3>
+            <p>連結優質供應商，為客戶找到最適合的產品與價格。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="body">
+            <div class="chip">Compliance</div>
+            <h3>成分與法規把關</h3>
+            <p>嚴格審查配方與進出口法規，確保合規上市。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="body">
+            <div class="chip">Private Label</div>
+            <h3>自有品牌代工</h3>
+            <p>評估並整合合適的 OEM 工廠，打造具競爭力的品牌商品。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="body">
+            <div class="chip">Sales</div>
+            <h3>銷售顧問服務</h3>
+            <p>提供市場洞察與行銷策略，拓展台灣及海外通路。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="body">
+            <div class="chip">Inventory</div>
+            <h3>庫存管理建議</h3>
+            <p>優化週轉率，降低滯銷與浪費，提升獲利能力。</p>
+          </div>
+        </article>
+        <article class="card">
+          <div class="body">
+            <div class="chip">Ordering</div>
+            <h3>訂貨系統規劃</h3>
+            <p>導入自動化訂貨與數位化流程，提高營運效率。</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products">
+    <div class="wrap">
+      <header class="sec-head fade">
+        <div class="sec-eyebrow">CATALOG</div>
+        <h2 class="sec-title">產品類別</h2>
+        <p class="sec-desc">以下為主力產品線示意，上線前可替換為實際規格與包裝照。</p>
+      </header>
+      <div class="cards fade">
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1519680772-42eebee79a63?q=80&w=1600&auto=format&fit=crop" alt="食用油示意">
+          <div class="body">
+            <div class="chip">Edible Oil</div>
+            <h3>全球貨源｜高品質食用油</h3>
+            <p>以米糠油為核心，橄欖油為輔；兼顧品質與性價比。</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1494597564530-871f2b93ac55?q=80&w=1600&auto=format&fit=crop" alt="葡萄酒示意">
+          <div class="body">
+            <div class="chip">Wine</div>
+            <h3>義大利酒莊｜專業甄選</h3>
+            <p>自有酒莊與專業品酒師資歷，涵蓋多產區與品項。</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1586201375754-1421e0aa2f94?q=80&w=1600&auto=format&fit=crop" alt="冷凍食品示意">
+          <div class="body">
+            <div class="chip">Frozen Food</div>
+            <h3>冷凍食品｜品牌與代工</h3>
+            <p>糕點、麵點、即食品項，支援品牌與 Private Label。</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1600&auto=format&fit=crop" alt="啤酒示意">
+          <div class="body">
+            <div class="chip">Beer</div>
+            <h3>全球啤酒｜全價格帶</h3>
+            <p>多來源、全酒精濃度與類型，滿足不同通路需求。</p>
+          </div>
+        </article>
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=1600&auto=format&fit=crop" alt="亞洲產品示意">
+          <div class="body">
+            <div class="chip">Asian Products</div>
+            <h3>亞洲產品線</h3>
+            <p>泰國、印尼、馬來西亞等特色品項與零食飲品。</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Channels -->
+  <section id="channels">
+    <div class="wrap">
+      <header class="sec-head fade">
+        <div class="sec-eyebrow">COVERAGE</div>
+        <h2 class="sec-title">涵蓋台灣主要通路</h2>
+        <p class="sec-desc">以下為示意標章，正式上線可替換為合作夥伴授權之商標圖檔。</p>
+      </header>
+      <div class="logos fade" aria-label="合作通路示意">
+        <div class="logo-item"><span>MOMO</span></div>
+        <div class="logo-item"><span>PChome</span></div>
+        <div class="logo-item"><span>東森購物</span></div>
+        <div class="logo-item"><span>酷澎</span></div>
+        <div class="logo-item"><span>量販/百貨</span></div>
+        <div class="logo-item"><span>餐飲/通路</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <div class="wrap">
+      <header class="sec-head fade">
+        <div class="sec-eyebrow">ABOUT</div>
+        <h2 class="sec-title">關於高玉企業</h2>
+        <p class="sec-desc">Golden Jade Terre Co., Ltd.（高玉企業）— 國際食品與飲品整合商。品牌形象：高端、專業、效率、可靠；致力於長期合作與品牌共創。</p>
+      </header>
+      <div class="kpis fade">
+        <div class="kpi"><b>Premium</b><br>品牌定位與視覺一致性</div>
+        <div class="kpi"><b>Efficient</b><br>溝通快速、流程透明</div>
+        <div class="kpi"><b>Reliable</b><br>文件完備、品質控管</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offices -->
+  <section id="offices">
+    <div class="wrap">
+      <header class="sec-head fade">
+        <div class="sec-eyebrow">GLOBAL OFFICES</div>
+        <h2 class="sec-title">全球據點</h2>
+        <p class="sec-desc">我們在義大利、台北、馬來西亞設有主要據點，並拓展至巴西與澳洲。</p>
+      </header>
+      <div class="offices fade">
+        <article class="kpi">
+          <h3 style="margin:0 0 6px">Italy Branch — TDS Srl</h3>
+          <p style="margin:0;color:#475569">Bolsena, Italy｜Est. 2016<br>Export：種子油・橄欖油・葡萄酒・冷凍烘焙・罐頭食品<br>Focus：Supplier Relationship／Market Trend／NPD</p>
+        </article>
+        <article class="kpi">
+          <h3 style="margin:0 0 6px">Taipei Branch — Golden Jade Terre Co.</h3>
+          <p style="margin:0;color:#475569">Taipei, Taiwan｜Est. 2020<br>Sales & Distribution｜Customer Relationship｜OEM 搜尋與採購｜品牌代理</p>
+        </article>
+        <article class="kpi">
+          <h3 style="margin:0 0 6px">Malaysia Branch — Nexo Resources Sdn Bhd</h3>
+          <p style="margin:0;color:#475569">Kuching, Malaysia｜Est. 2021<br>Export：泡麵・椰子製品・糖果零食｜Local Procurement｜Supplier Relationship｜NPD</p>
+        </article>
+        <article class="kpi">
+          <h3 style="margin:0 0 6px">Brazil Office</h3>
+          <p style="margin:0;color:#475569">Brazil｜Business Development</p>
+        </article>
+        <article class="kpi">
+          <h3 style="margin:0 0 6px">Australia Office</h3>
+          <p style="margin:0;color:#475569">Australia｜Business Development</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <header class="sec-head fade">
+        <div class="sec-eyebrow">CONTACT</div>
+        <h2 class="sec-title">聯絡我們</h2>
+        <p class="sec-desc">留下需求，團隊將盡快回覆。地址：台北市中正區北平東路16號6樓之3</p>
+      </header>
+      <form class="fade" onsubmit="event.preventDefault(); alert('已收到您的訊息，感謝！');">
+        <div>
+          <label for="name">姓名</label>
+          <input id="name" name="name" placeholder="您的稱呼" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        </div>
+        <div class="full">
+          <label for="topic">需求主題</label>
+          <select id="topic" name="topic">
+            <option>採購/報價</option>
+            <option>成為合作通路</option>
+            <option>品牌聯名/禮盒</option>
+            <option>其他</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="msg">訊息內容</label>
+          <textarea id="msg" name="msg" placeholder="請簡述需求、數量或預算..." ></textarea>
+        </div>
+        <div class="full">
+          <button class="btn btn-primary" type="submit">送出訊息</button>
+        </div>
+        <p class="form-note">* 本表單為示意。上線時可串接 Email 或後端服務。</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <div class="brand" style="margin-bottom:10px">
+            <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5Zm0 3.5 5 3.1v6.8l-5 3.1-5-3.1V8.6l5-3.1Z"/></svg></span>
+            <span class="name"><span>Golden Jade Terre</span><span>高玉企業有限公司</span></span>
+          </div>
+          <p>專業、信賴、長期夥伴 — 我們以高品質與高效率，連結產地與市場。</p>
+        </div>
+        <div>
+          <h4>公司資訊</h4>
+          <p>統編／Company No. — <br/>Email — info@goldenjadeterre.com<br/>電話 — +886-2-2251-8810</p>
+        </div>
+        <div>
+          <h4>地址</h4>
+          <address>100 台北市中正區北平東路16號6樓之3</address>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">© <span id="year"></span> Golden Jade Terre Co., Ltd. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Mobile drawer
+    const btn = document.getElementById('menuBtn');
+    const drawer = document.getElementById('drawer');
+    btn?.addEventListener('click', ()=>{
+      const open = drawer.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+      drawer.setAttribute('aria-hidden', !open);
+    });
+    drawer?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+      drawer.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      drawer.setAttribute('aria-hidden','true');
+    }));
+
+    // Fade-in on view
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('appear'); io.unobserve(e.target);} });
+    },{threshold:.2});
+    document.querySelectorAll('.fade').forEach(el=>io.observe(el));
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll (native behavior for modern browsers; fallback below)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click', (e)=>{
+      const id = a.getAttribute('href');
+      if(id.length>1){
+        const el = document.querySelector(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); }
+      }
+    }));
+  </script>
 </body>
 </html>
