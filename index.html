@@ -49,6 +49,12 @@
       .drawer{position:fixed;inset:0 0 0 auto;width:min(85vw,360px);transform:translateX(100%);transition:transform .3s ease;background:#fff;border-left:1px solid #e5e7eb;display:flex;flex-direction:column}
       .drawer.open{transform:translateX(0)}
       .drawer a{padding:16px 20px;border-bottom:1px solid #f1f5f9}
+      .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:55}
+      .backdrop.show{opacity:1;pointer-events:auto}
+      .drawer{z-index:60}
+      .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid #f1f5f9}
+      .drawer-close{width:40px;height:40px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;cursor:pointer}
+      .drawer-close:focus{box-shadow:var(--ring)}
     }
     /* Hero */
     .hero{background:linear-gradient(180deg, #0f2e1d 0%, #153826 60%, #0f2e1d 100%);color:#fff}
@@ -118,6 +124,8 @@
     /* Utilities */
     .fade{opacity:0;transform:translateY(8px);transition:all .5s ease}
     .fade.appear{opacity:1;transform:none}
+    body.no-scroll{overflow:hidden}
+
   </style>
 </head>
 <body>
@@ -142,6 +150,27 @@
       <button class="menu-toggle" id="menuBtn" aria-controls="drawer" aria-expanded="false" aria-label="開啟選單">☰</button>
     </div>
   </header>
+  <!-- Mobile Drawer (for <=900px) -->
+  <div class="backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" aria-hidden="true" aria-label="行動版選單">
+    <div class="drawer-head">
+      <div style="display:flex;align-items:center;gap:10px">
+        <img class="logo-img" src="GJ_LOGO.png" alt="Golden Jade Terre Logo" />
+        <div style="display:flex;flex-direction:column;line-height:1.05">
+          <b style="font-family:Oswald,Impact,sans-serif;letter-spacing:.5px">Golden Jade Terre</b>
+          <span style="font-size:12px;color:#64748b">高玉企業有限公司</span>
+        </div>
+      </div>
+      <button class="drawer-close" id="drawerClose" aria-label="關閉選單">✕</button>
+    </div>
+    <a href="#expertise">服務</a>
+    <a href="#products">產品</a>
+    <a href="#channels">通路</a>
+    <a href="#about">關於我們</a>
+    <a href="#offices">全球據點</a>
+    <a href="#contact">聯絡</a>
+  </aside>
+
 
   <!-- Hero -->
   <section class="hero" id="home">
@@ -378,16 +407,35 @@
     // Mobile drawer
     const btn = document.getElementById('menuBtn');
     const drawer = document.getElementById('drawer');
+    const backdrop = document.getElementById('drawerBackdrop');
+    const closeBtn = document.getElementById('drawerClose');
+
+    function setDrawer(open){
+      if(!btn || !drawer) return;
+      drawer.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      drawer.setAttribute('aria-hidden', String(!open));
+      document.body.classList.toggle('no-scroll', open);
+      if(backdrop){
+        backdrop.classList.toggle('show', open);
+        backdrop.setAttribute('aria-hidden', String(!open));
+      }
+    }
+
     btn?.addEventListener('click', ()=>{
-      const open = drawer.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open);
-      drawer.setAttribute('aria-hidden', !open);
+      const isOpen = drawer?.classList.contains('open');
+      setDrawer(!isOpen);
     });
-    drawer?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-      drawer.classList.remove('open');
-      btn.setAttribute('aria-expanded','false');
-      drawer.setAttribute('aria-hidden','true');
-    }));
+
+    closeBtn?.addEventListener('click', ()=> setDrawer(false));
+    backdrop?.addEventListener('click', ()=> setDrawer(false));
+
+    drawer?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=> setDrawer(false)));
+
+    // ESC to close (desktop testing)
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape') setDrawer(false);
+    });
 
     // Fade-in on view
     const io = new IntersectionObserver((entries)=>{
